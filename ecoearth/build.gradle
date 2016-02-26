@@ -1,4 +1,4 @@
 version = getVersion("EcoEarth", "VERSION") + "-1.8.9"
-def llibrary_version = getVersion("EcoEarth", "LLIBRARY_VERSION")
+ext.llibrary_version = getVersion("EcoEarth", "LLIBRARY_VERSION")
 group = "net.ecocraft.ecoearth"
 archivesBaseName = "ecoearth"

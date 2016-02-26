@@ -17,13 +17,30 @@ buildscript {
 
 apply plugin: "java"
 
-version = getVersion("EcoCore", "VERSION") + "-1.8.9"
-def llibrary_version = getVersion("EcoCore", "LLIBRARY_VERSION")
-group = "net.ecocraft.ecocore"
-archivesBaseName = "ecocore"
-
-allprojects {
+subprojects {
+    subProject -> afterEvaluate{
+        dependencies {
+            compile project(":ecocore")
+            compile "net.ilexiconn:llibrary:" + subProject.llibrary_version + "-1.8.9:dev"
+        }
+    
+        processResources {
+            inputs.property "version", subProject.version
+            inputs.property "mcversion", subProject.minecraft.version
+            inputs.property "llibrary_version", subProject.llibrary_version
+    
+            from(subProject.sourceSets.main.resources.srcDirs) {
+                   include "mcmod.info"
+                expand "version": project.version, "mcversion": project.minecraft.version, "llibrary_version": llibrary_version
+            }
+    
+            from(subProject.sourceSets.main.resources.srcDirs) {
+                exclude "mcmod.info"
+            }
+        }
+    }
     apply plugin: "net.minecraftforge.gradle.forge"
+    apply plugin: "java"
 
     sourceCompatibility = targetCompatibility = "1.7"
 
@@ -39,38 +56,14 @@ allprojects {
             url = "http://maven.ilexiconn.net"
         }
     }
-
-    dependencies {
-        compile "net.ilexiconn:llibrary:$llibrary_version-1.8.9:dev"
-    }
-
-    processResources {
-        inputs.property "version", project.version
-        inputs.property "mcversion", project.minecraft.version
-        inputs.property "llibrary_version", llibrary_version
-
-        from(sourceSets.main.resources.srcDirs) {
-            include "mcmod.info"
-            expand "version": project.version, "mcversion": project.minecraft.version, "llibrary_version": llibrary_version
-        }
-
-        from(sourceSets.main.resources.srcDirs) {
-            exclude "mcmod.info"
-        }
-    }
-}
-
-subprojects {
-    dependencies {
-        compile rootProject
-    }
 }
 
 dependencies {
-    runtime project(":ecoearth")
-    runtime project(":ecofauna")
-    runtime project(":ecoflora")
-    runtime project(":ecoterra")
+    compile project(":ecocore")
+    compile project(":ecoearth")
+    compile project(":ecofauna")
+    compile project(":ecoflora")
+    compile project(":ecoterra")
 }
 
 def getVersion(String main, String type) {
@@ -79,10 +72,7 @@ def getVersion(String main, String type) {
     String patch = "0";
     String dir = main.toLowerCase()
     String prefix = "public static final String $type = \"";
-    File mainfile = file("src/main/java/net/ecocraft/$dir/$main" + ".java")
-    if (!main.equals("EcoCore")) {
-        mainfile = file("$dir/src/main/java/net/ecocraft/$dir/$main" + ".java")
-    }
+    File mainfile = file("$dir/src/main/java/net/ecocraft/$dir/$main" + ".java")
     mainfile.eachLine { String s ->
         s = s.trim();
         if (s.startsWith(prefix)) {

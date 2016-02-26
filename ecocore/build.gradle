@@ -1,0 +1,4 @@
+version = getVersion("EcoCore", "VERSION") + "-1.8.9"
+ext.llibrary_version = getVersion("EcoCore", "LLIBRARY_VERSION")
+group = "net.ecocraft.ecocore"
+archivesBaseName = "ecocore"
