@@ -67,10 +67,10 @@ subprojects {
 }
 
 dependencies {
-    compile project(":ecoearth")
-    compile project(":ecofauna")
-    compile project(":ecoflora")
-    compile project(":ecoterra")
+    runtime project(":ecoearth")
+    runtime project(":ecofauna")
+    runtime project(":ecoflora")
+    runtime project(":ecoterra")
 }
 
 def getVersion(String main, String type) {
