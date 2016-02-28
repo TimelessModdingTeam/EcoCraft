@@ -20,7 +20,9 @@ apply plugin: "java"
 subprojects {
     subProject -> afterEvaluate{
         dependencies {
-            compile project(":ecocore")
+            if(subProject.name != "ecocore") {
+                compile project(":ecocore")
+            }
             compile "net.ilexiconn:llibrary:" + subProject.llibrary_version + "-1.8.9:dev"
         }
     
