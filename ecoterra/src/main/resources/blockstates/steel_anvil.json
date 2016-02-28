@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=south": {
+      "model": "ecoterra:tables/steel_anvil"
+    },
+    "facing=west": {
+      "model": "ecoterra:tables/steel_anvil",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "ecoterra:tables/steel_anvil",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "ecoterra:tables/steel_anvil",
+      "y": 270
+    }
+  }
+}

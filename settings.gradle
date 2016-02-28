@@ -1,0 +1,4 @@
+include ":ecoearth"
+include ":ecofauna"
+include ":ecoflora"
+include ":ecoterra"

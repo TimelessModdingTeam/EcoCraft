@@ -1,0 +1,8 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "ecocraft:blocks/post_top",
+    "front": "ecocraft:blocks/post_side",
+    "side": "ecocraft:blocks/post_side"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "ecoterra:blocks/ores/ruby_ore"
+  }
+}
+

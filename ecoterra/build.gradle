@@ -1,0 +1,4 @@
+version = getVersion("EcoTerra", "VERSION") + "-1.8.9"
+def llibrary_version = getVersion("EcoTerra", "LLIBRARY_VERSION")
+group = "net.ecocraft.ecoterra"
+archivesBaseName = "ecoterra"

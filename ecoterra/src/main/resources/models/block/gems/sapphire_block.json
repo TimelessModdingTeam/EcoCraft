@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "ecoterra:blocks/gems/sapphire_block"
+  }
+}

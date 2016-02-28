@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": {
+      "model": "ecocraft:block_item"
+    }
+  }
+}

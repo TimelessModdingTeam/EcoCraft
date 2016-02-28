@@ -1,0 +1,8 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "ecoterra:blocks/tables/smeltery_top",
+    "front": "ecoterra:blocks/tables/smeltery_front_on",
+    "side": "ecoterra:blocks/tables/smeltery_side"
+  }
+}

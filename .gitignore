@@ -1,0 +1,12 @@
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.gradle/
+.settings/
+build/
+out/
+bin/
+minecraft/
+eclipse/

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "ecoterra:tables/smeltery"
+    },
+    "facing=south": {
+      "model": "ecoterra:tables/smeltery",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "ecoterra:tables/smeltery",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "ecoterra:tables/smeltery",
+      "y": 90
+    }
+  }
+}

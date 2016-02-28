@@ -1,0 +1,11 @@
+[
+  {
+    "modid": "ecoterra",
+    "name": "EcoTerra",
+    "authorList": [
+      "TeamEC"
+    ],
+    "description": "EcoCraft Terra"
+    "version": "${version}",
+  }
+]
