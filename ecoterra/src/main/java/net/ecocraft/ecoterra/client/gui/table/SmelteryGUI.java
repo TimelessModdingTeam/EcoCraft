@@ -10,7 +10,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ResourceLocation;
 
 public class SmelteryGUI extends DoubleInventoryGUI {
-    public static final ResourceLocation resourceLocation = new ResourceLocation(EcoTerra.MODID, "textures/gui/container/smeltery.png");
+    public static final ResourceLocation resourceLocation = new ResourceLocation(EcoTerra.MODID, "assets/ecoterra/textures/gui/container/smeltery.png");
 
     public IInventory tileFurnace, playerInventory;
 
