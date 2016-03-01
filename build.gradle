@@ -15,15 +15,10 @@ buildscript {
     }
 }
 
+apply plugin: "idea"
+apply plugin: "eclipse"
+
 allprojects {
-    apply plugin: "net.minecraftforge.gradle.forge"
-
-    minecraft {
-        version = "1.8.9-11.15.1.1722"
-        runDir = "minecraft"
-        mappings = "stable_20"
-    }
-
     repositories {
         maven {
             name = "ilexiconn"
@@ -33,21 +28,49 @@ allprojects {
 }
 
 subprojects {
-    subProject -> afterEvaluate{
+    subProject ->
+
+    apply plugin: "java"
+    apply plugin: "net.minecraftforge.gradle.forge"
+
+    sourceCompatibility = targetCompatibility = "1.7"
+
+    minecraft {
+        version = "1.8.9-11.15.1.1722"
+        runDir = "minecraft"
+        mappings = "stable_20"
+    }
+
+    dependencies {
+        testCompile 'junit:junit:4.12'
+    }
+    
+    task deobfJar(type: Jar) {
+        from sourceSets.main.output
+        classifier = 'dev'
+    }
+    
+    configurations {
+        deobf
+        
+        archives.extendsFrom(deobf)
+    }
+    
+    artifacts {
+        deobf deobfJar
+    }
+
+    afterEvaluate{
         dependencies {
-            if(subProject.name != "ecocore") {
-                compile project(":ecocore")
-            }
             compile "net.ilexiconn:llibrary:" + subProject.llibrary_version + "-1.8.9:dev"
         }
-    
         processResources {
             inputs.property "version", subProject.version
             inputs.property "mcversion", subProject.minecraft.version
             inputs.property "llibrary_version", subProject.llibrary_version
     
             from(subProject.sourceSets.main.resources.srcDirs) {
-                   include "mcmod.info"
+                include "mcmod.info"
                 expand "version": project.version, "mcversion": project.minecraft.version, "llibrary_version": llibrary_version
             }
     
@@ -56,16 +79,6 @@ subprojects {
             }
         }
     }
-    apply plugin: "java"
-    sourceCompatibility = targetCompatibility = "1.7"
-}
-
-dependencies {
-    compile project(":ecocore")
-    compile project(":ecoearth")
-    compile project(":ecofauna")
-    compile project(":ecoflora")
-    compile project(":ecoterra")
 }
 
 def getVersion(String main, String type) {

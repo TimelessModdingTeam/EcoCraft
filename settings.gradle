@@ -1,5 +1,5 @@
+include ":ecocore"
 include ":ecoearth"
 include ":ecofauna"
 include ":ecoflora"
 include ":ecoterra"
-include ":ecocore"

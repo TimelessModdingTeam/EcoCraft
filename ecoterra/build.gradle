@@ -2,3 +2,7 @@ version = getVersion("EcoTerra", "VERSION") + "-1.8.9"
 ext.llibrary_version = getVersion("EcoTerra", "LLIBRARY_VERSION")
 group = "net.ecocraft.ecoterra"
 archivesBaseName = "ecoterra"
+
+dependencies {
+    compile project(path: ":ecocore", configuration: "deobf")
+}
