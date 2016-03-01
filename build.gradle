@@ -15,7 +15,22 @@ buildscript {
     }
 }
 
-apply plugin: "java"
+allprojects {
+    apply plugin: "net.minecraftforge.gradle.forge"
+
+    minecraft {
+        version = "1.8.9-11.15.1.1722"
+        runDir = "minecraft"
+        mappings = "stable_20"
+    }
+
+    repositories {
+        maven {
+            name = "ilexiconn"
+            url = "http://maven.ilexiconn.net"
+        }
+    }
+}
 
 subprojects {
     subProject -> afterEvaluate{
@@ -41,23 +56,8 @@ subprojects {
             }
         }
     }
-    apply plugin: "net.minecraftforge.gradle.forge"
     apply plugin: "java"
-
     sourceCompatibility = targetCompatibility = "1.7"
-
-    minecraft {
-        version = "1.8.9-11.15.1.1722"
-        runDir = "minecraft"
-        mappings = "stable_20"
-    }
-
-    repositories {
-        maven {
-            name = "ilexiconn"
-            url = "http://maven.ilexiconn.net"
-        }
-    }
 }
 
 dependencies {
