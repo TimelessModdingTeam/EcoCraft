@@ -38,7 +38,7 @@ subprojects {
     minecraft {
         version = "1.8.9-11.15.1.1722"
         runDir = "minecraft"
-        mappings = "stable_20"
+        mappings = "stable_22"
     }
 
     dependencies {
@@ -80,6 +80,17 @@ subprojects {
         }
     }
 }
+
+task gatherAllOutputs(type: LinkTask) {
+    subprojects.each {
+        inputs.dir it.libsDir
+        dependsOn it.tasks.build
+    }
+    
+    outputDir = file("build")
+}
+
+task("build").dependsOn gatherAllOutputs
 
 def getVersion(String main, String type) {
     String major = "0";
