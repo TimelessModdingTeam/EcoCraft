@@ -10,3 +10,5 @@ out/
 bin/
 minecraft/
 eclipse/
+*.mchmap
+*.mcbmap
