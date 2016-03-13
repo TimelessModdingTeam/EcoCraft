@@ -18,15 +18,6 @@ buildscript {
 apply plugin: "idea"
 apply plugin: "eclipse"
 
-allprojects {
-    repositories {
-        maven {
-            name = "ilexiconn"
-            url = "http://maven.ilexiconn.net"
-        }
-    }
-}
-
 subprojects {
     subProject ->
 
@@ -61,17 +52,13 @@ subprojects {
     }
 
     afterEvaluate{
-        dependencies {
-            compile "net.ilexiconn:llibrary:" + subProject.llibrary_version + "-1.8.9:dev"
-        }
         processResources {
             inputs.property "version", subProject.version
             inputs.property "mcversion", subProject.minecraft.version
-            inputs.property "llibrary_version", subProject.llibrary_version
     
             from(subProject.sourceSets.main.resources.srcDirs) {
                 include "mcmod.info"
-                expand "version": project.version, "mcversion": project.minecraft.version, "llibrary_version": llibrary_version
+                expand "version": project.version, "mcversion": project.minecraft.version
             }
     
             from(subProject.sourceSets.main.resources.srcDirs) {

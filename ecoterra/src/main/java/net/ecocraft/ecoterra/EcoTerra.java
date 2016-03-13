@@ -38,11 +38,10 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-@Mod(modid = EcoTerra.MODID, name = "EcoTerra", version = EcoTerra.VERSION, dependencies = "before:ecocore;required-after:llibrary@[" + EcoTerra.LLIBRARY_VERSION + ",)")
+@Mod(modid = EcoTerra.MODID, name = "EcoTerra", version = EcoTerra.VERSION)
 public class EcoTerra {
     public static final String MODID = "ecoterra";
     public static final String VERSION = "0.1.0";
-    public static final String LLIBRARY_VERSION = "0.8.0";
 
     @Mod.Instance(MODID)
     public static EcoTerra instance;
