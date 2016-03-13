@@ -1,8 +1,8 @@
 package net.ecocraft.ecocore;
 
-import net.ecocraft.ecocore.server.ServerProxy;
-import net.ecocraft.ecocore.server.registry.helper.ContentObject;
-import net.ecocraft.ecocore.server.registry.recipe.StatRecipes;
+import net.ecocraft.ecocore.proxy.ServerProxy;
+import net.ecocraft.ecocore.registry.helper.ContentObject;
+import net.ecocraft.ecocore.registry.recipe.StatRecipes;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -17,7 +17,7 @@ public class EcoCore {
 
     @Mod.Instance(MODID)
     public static EcoCore instance;
-    @SidedProxy(serverSide = "net.ecocraft.ecocore.server.ServerProxy", clientSide = "net.ecocraft.ecocore.client.ClientProxy")
+    @SidedProxy(serverSide = "net.ecocraft.ecocore.proxy.ServerProxy", clientSide = "net.ecocraft.ecocore.proxy.ClientProxy")
     public static ServerProxy proxy;
 
     @Mod.EventHandler

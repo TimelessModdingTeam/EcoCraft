@@ -1,29 +1,29 @@
 package net.ecocraft.ecoterra;
 
-import net.ecocraft.ecocore.server.registry.EcoRegistry;
-import net.ecocraft.ecocore.server.registry.helper.ContentObject;
-import net.ecocraft.ecocore.server.registry.helper.RecipeHelper;
-import net.ecocraft.ecoterra.client.gui.GUIHandler;
-import net.ecocraft.ecoterra.server.ServerProxy;
-import net.ecocraft.ecoterra.server.api.EcoTerraAPI;
-import net.ecocraft.ecoterra.server.block.entity.table.AnvilBlockEntity;
-import net.ecocraft.ecoterra.server.block.entity.table.SmelteryBlockEntity;
-import net.ecocraft.ecoterra.server.block.table.AnvilBlock;
-import net.ecocraft.ecoterra.server.block.table.SmelteryBlock;
-import net.ecocraft.ecoterra.server.block.terra.GemBlock;
-import net.ecocraft.ecoterra.server.block.terra.GemOreBlock;
-import net.ecocraft.ecoterra.server.block.terra.MetalBlock;
-import net.ecocraft.ecoterra.server.block.terra.MetalOreBlock;
-import net.ecocraft.ecoterra.server.item.Material;
-import net.ecocraft.ecoterra.server.item.commodity.MetalChainItem;
-import net.ecocraft.ecoterra.server.item.commodity.StuddedLeatherItem;
-import net.ecocraft.ecoterra.server.item.terra.GemItem;
-import net.ecocraft.ecoterra.server.item.terra.IngotItem;
-import net.ecocraft.ecoterra.server.item.terra.NuggetItem;
-import net.ecocraft.ecoterra.server.item.tools.AxeItem;
-import net.ecocraft.ecoterra.server.item.tools.HoeItem;
-import net.ecocraft.ecoterra.server.item.tools.PickaxeItem;
-import net.ecocraft.ecoterra.server.item.tools.ShovelItem;
+import net.ecocraft.ecocore.registry.EcoRegistry;
+import net.ecocraft.ecocore.registry.helper.ContentObject;
+import net.ecocraft.ecocore.registry.helper.RecipeHelper;
+import net.ecocraft.ecoterra.gui.GUIHandler;
+import net.ecocraft.ecoterra.proxy.ServerProxy;
+import net.ecocraft.ecoterra.api.EcoTerraAPI;
+import net.ecocraft.ecoterra.tileentity.table.AnvilBlockEntity;
+import net.ecocraft.ecoterra.tileentity.table.SmelteryBlockEntity;
+import net.ecocraft.ecoterra.block.table.AnvilBlock;
+import net.ecocraft.ecoterra.block.table.SmelteryBlock;
+import net.ecocraft.ecoterra.block.terra.GemBlock;
+import net.ecocraft.ecoterra.block.terra.GemOreBlock;
+import net.ecocraft.ecoterra.block.terra.MetalBlock;
+import net.ecocraft.ecoterra.block.terra.MetalOreBlock;
+import net.ecocraft.ecoterra.item.Material;
+import net.ecocraft.ecoterra.item.commodity.MetalChainItem;
+import net.ecocraft.ecoterra.item.commodity.StuddedLeatherItem;
+import net.ecocraft.ecoterra.item.terra.GemItem;
+import net.ecocraft.ecoterra.item.terra.IngotItem;
+import net.ecocraft.ecoterra.item.terra.NuggetItem;
+import net.ecocraft.ecoterra.item.tools.AxeItem;
+import net.ecocraft.ecoterra.item.tools.HoeItem;
+import net.ecocraft.ecoterra.item.tools.PickaxeItem;
+import net.ecocraft.ecoterra.item.tools.ShovelItem;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -45,7 +45,7 @@ public class EcoTerra {
 
     @Mod.Instance(MODID)
     public static EcoTerra instance;
-    @SidedProxy(serverSide = "net.ecocraft.ecoterra.server.ServerProxy", clientSide = "net.ecocraft.ecoterra.client.ClientProxy")
+    @SidedProxy(serverSide = "net.ecocraft.ecoterra.proxy.ServerProxy", clientSide = "net.ecocraft.ecoterra.proxy.ClientProxy")
     public static ServerProxy proxy;
 
     @Mod.EventHandler
