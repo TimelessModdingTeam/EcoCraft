@@ -1,5 +1,6 @@
 import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.*;
+import org.gradle.api.artifacts.*;
 import org.gradle.api.tasks.incremental.*;
 
 class LinkTask extends DefaultTask {

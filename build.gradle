@@ -43,12 +43,15 @@ subprojects {
     
     configurations {
         deobf
+        sources
         
-        archives.extendsFrom(deobf)
+        archives.extendsFrom deobf
+        archives.extendsFrom sources
     }
     
     artifacts {
         deobf deobfJar
+        sources sourceJar
     }
 
     afterEvaluate{
@@ -65,19 +68,23 @@ subprojects {
                 exclude "mcmod.info"
             }
         }
+        subProject.configurations.archives.allArtifacts.each {
+            artifact->
+            def taskname = "gatherOutputs" + artifact.classifier
+            def task = tasks.findByPath(taskname)
+            if(task == null) {
+                task = tasks.create(name: taskname, type: LinkTask, {
+                    outputDir = file("build/" + artifact.classifier)
+                })
+                tasks.findByPath(":build").dependsOn task
+            }
+            task.inputs.file artifact.file
+            task.dependsOn artifact
+        }
     }
 }
 
-task gatherAllOutputs(type: LinkTask) {
-    subprojects.each {
-        inputs.dir it.libsDir
-        dependsOn it.tasks.build
-    }
-    
-    outputDir = file("build")
-}
-
-task("build").dependsOn gatherAllOutputs
+task("build")
 
 def getVersion(String main, String type) {
     String major = "0";
