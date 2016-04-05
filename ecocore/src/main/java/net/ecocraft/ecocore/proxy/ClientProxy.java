@@ -1,8 +1,11 @@
 package net.ecocraft.ecocore.proxy;
 
 import java.util.List;
+import java.util.Set;
 
 import net.ecocraft.ecocore.registry.helper.ContentObject;
+import net.ecocraft.ecocore.registry.helper.EntityEntry;
+import net.ecocraft.ecocore.server.registry.EcoRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -19,6 +22,7 @@ public class ClientProxy extends ServerProxy {
 	@Override
 	public void onPreInit() {
 		super.onPreInit();
+
 	}
 
 	@Override
@@ -34,22 +38,31 @@ public class ClientProxy extends ServerProxy {
 		renderItem = Minecraft.getMinecraft().getRenderItem();
 		itemModelMesher = renderItem.getItemModelMesher();
 
+		this.registerEntityRenderers();
 		this.registerObjRegRenderers();
 	}
 
 	// Protected Functions
 	protected void registerObjRegRenderers() {
-		Object[] regMods = ContentObject.getRegMods();
+		Set<Object> regMods = EcoRegistry.instance.getRegMods();
 		for (Object modObj : regMods) {
-			List<ContentObject> contentRegistries = ContentObject.getObjRegs(modObj);
-
-			if (contentRegistries == null) {
-				continue;
-			}
+			List<ContentObject> contentRegistries = EcoRegistry.instance.getObjRegs(modObj);
 
 			for (ContentObject contentObject : contentRegistries) {
 				contentObject.registerRenderer(itemModelMesher);
 				contentObject.registerSpecialClientRenderers();
+			}
+
+		}
+	}
+
+	protected void registerEntityRenderers() {
+		Set<Object> regMods = EcoRegistry.instance.getRegMods();
+		for (Object modObj : regMods) {
+			List<EntityEntry<?>> entityList = EcoRegistry.instance.getEntityEntries(modObj);
+
+			for (EntityEntry<?> entityEntry : entityList) {
+				entityEntry.registerRenderer();
 			}
 		}
 	}

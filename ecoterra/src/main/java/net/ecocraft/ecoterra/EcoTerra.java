@@ -3,17 +3,14 @@ package net.ecocraft.ecoterra;
 import net.ecocraft.ecocore.registry.EcoRegistry;
 import net.ecocraft.ecocore.registry.helper.ContentObject;
 import net.ecocraft.ecocore.registry.helper.RecipeHelper;
-import net.ecocraft.ecoterra.gui.GUIHandler;
-import net.ecocraft.ecoterra.proxy.ServerProxy;
 import net.ecocraft.ecoterra.api.EcoTerraAPI;
-import net.ecocraft.ecoterra.tileentity.table.AnvilBlockEntity;
-import net.ecocraft.ecoterra.tileentity.table.SmelteryBlockEntity;
 import net.ecocraft.ecoterra.block.table.AnvilBlock;
 import net.ecocraft.ecoterra.block.table.SmelteryBlock;
 import net.ecocraft.ecoterra.block.terra.GemBlock;
 import net.ecocraft.ecoterra.block.terra.GemOreBlock;
 import net.ecocraft.ecoterra.block.terra.MetalBlock;
 import net.ecocraft.ecoterra.block.terra.MetalOreBlock;
+import net.ecocraft.ecoterra.gui.GUIHandler;
 import net.ecocraft.ecoterra.item.Material;
 import net.ecocraft.ecoterra.item.commodity.MetalChainItem;
 import net.ecocraft.ecoterra.item.commodity.StuddedLeatherItem;
@@ -24,6 +21,9 @@ import net.ecocraft.ecoterra.item.tools.AxeItem;
 import net.ecocraft.ecoterra.item.tools.HoeItem;
 import net.ecocraft.ecoterra.item.tools.PickaxeItem;
 import net.ecocraft.ecoterra.item.tools.ShovelItem;
+import net.ecocraft.ecoterra.proxy.ServerProxy;
+import net.ecocraft.ecoterra.tileentity.table.AnvilBlockEntity;
+import net.ecocraft.ecoterra.tileentity.table.SmelteryBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -40,36 +40,39 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(modid = EcoTerra.MODID, name = "EcoTerra", version = EcoTerra.VERSION)
 public class EcoTerra {
-    public static final String MODID = "ecoterra";
-    public static final String VERSION = "0.1.0";
+	public static final String MODID = "ecoterra";
+	public static final String VERSION = "0.1.0";
 
-    @Mod.Instance(MODID)
-    public static EcoTerra instance;
-    @SidedProxy(serverSide = "net.ecocraft.ecoterra.proxy.ServerProxy", clientSide = "net.ecocraft.ecoterra.proxy.ClientProxy")
-    public static ServerProxy proxy;
+	@Mod.Instance(MODID)
+	public static EcoTerra instance;
+	@SidedProxy(
+			serverSide = "net.ecocraft.ecoterra.proxy.ServerProxy",
+			clientSide = "net.ecocraft.ecoterra.proxy.ClientProxy")
+	public static ServerProxy proxy;
 
-    @Mod.EventHandler
-    public void onPreInit(FMLPreInitializationEvent event) {
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GUIHandler());
+	@Mod.EventHandler
+	public void onPreInit(FMLPreInitializationEvent event) {
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GUIHandler());
 
-        this.removeContent();
-        this.registerContent();
+		this.removeContent();
+		this.registerContent();
 
-        proxy.onPreInit();
-    }
+		proxy.onPreInit();
+	}
 
-    @Mod.EventHandler
-    public void onInit(FMLInitializationEvent event) {
-        proxy.onInit();
+	@Mod.EventHandler
+	public void onInit(FMLInitializationEvent event) {
+		proxy.onInit();
 
-        this.registerRecipes();
-    }
+		this.registerRecipes();
+	}
 
-    @Mod.EventHandler
-    public void onPostInit(FMLPostInitializationEvent event) {
-        proxy.onPostInit();
-    }
+	@Mod.EventHandler
+	public void onPostInit(FMLPostInitializationEvent event) {
+		proxy.onPostInit();
+	}
 
+	//@formatter:off
     //Functions
     public void removeContent() {
         //Resources and Derived Tools
@@ -343,17 +346,17 @@ public class EcoTerra {
         RecipeHelper.registerMetal("iron");
         RecipeHelper.registerMetal("steel", false);
 
-        EcoTerraAPI.addDualSmeltingRecipe(new ItemStack(ContentObject.getObjReg("bronze_ingot").getItem(), 2), new ItemStack[]{
-                new ItemStack(Item.getItemFromBlock(ContentObject.getObjReg("copper_ore").getBlock())),
-                new ItemStack(Item.getItemFromBlock(ContentObject.getObjReg("tin_ore").getBlock()))});
-        EcoTerraAPI.addDualSmeltingRecipe(new ItemStack(ContentObject.getObjReg("bronze_ingot").getItem(), 2), new ItemStack[]{
-                new ItemStack(ContentObject.getObjReg("copper_ingot").getItem()),
-                new ItemStack(ContentObject.getObjReg("tin_ingot").getItem())});
-        EcoTerraAPI.addDualSmeltingRecipe(new ItemStack(ContentObject.getObjReg("steel_ingot").getItem(), 2), new ItemStack[]{
-                new ItemStack(ContentObject.getObjReg("iron_ingot").getItem()),
+        EcoTerraAPI.addDualSmeltingRecipe(new ItemStack(EcoRegistry.instance.getObjReg("bronze_ingot").getItem(), 2), new ItemStack[]{
+                new ItemStack(Item.getItemFromBlock(EcoRegistry.instance.getObjReg("copper_ore").getBlock())),
+                new ItemStack(Item.getItemFromBlock(EcoRegistry.instance.getObjReg("tin_ore").getBlock()))});
+        EcoTerraAPI.addDualSmeltingRecipe(new ItemStack(EcoRegistry.instance.getObjReg("bronze_ingot").getItem(), 2), new ItemStack[]{
+                new ItemStack(EcoRegistry.instance.getObjReg("copper_ingot").getItem()),
+                new ItemStack(EcoRegistry.instance.getObjReg("tin_ingot").getItem())});
+        EcoTerraAPI.addDualSmeltingRecipe(new ItemStack(EcoRegistry.instance.getObjReg("steel_ingot").getItem(), 2), new ItemStack[]{
+                new ItemStack(EcoRegistry.instance.getObjReg("iron_ingot").getItem()),
                 new ItemStack(Items.coal)});
-        EcoTerraAPI.addDualSmeltingRecipe(new ItemStack(ContentObject.getObjReg("steel_ingot").getItem(), 2), new ItemStack[]{
-                new ItemStack(Item.getItemFromBlock(ContentObject.getObjReg("iron_ore").getBlock())),
+        EcoTerraAPI.addDualSmeltingRecipe(new ItemStack(EcoRegistry.instance.getObjReg("steel_ingot").getItem(), 2), new ItemStack[]{
+                new ItemStack(Item.getItemFromBlock(EcoRegistry.instance.getObjReg("iron_ore").getBlock())),
                 new ItemStack(Items.coal)});
     }
 }

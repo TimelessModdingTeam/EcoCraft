@@ -1,7 +1,7 @@
 package net.ecocraft.ecocore;
 
 import net.ecocraft.ecocore.proxy.ServerProxy;
-import net.ecocraft.ecocore.registry.helper.ContentObject;
+import net.ecocraft.ecocore.registry.EcoRegistry;
 import net.ecocraft.ecocore.registry.recipe.StatRecipes;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -12,32 +12,40 @@ import net.minecraftforge.oredict.RecipeSorter;
 
 @Mod(modid = EcoCore.MODID, name = "EcoCore", version = EcoCore.VERSION)
 public class EcoCore {
-    public static final String MODID = "ecocore";
-    public static final String VERSION = "0.1.0";
+	public static final String MODID = "ecocore";
+	public static final String VERSION = "0.1.0";
 
-    @Mod.Instance(MODID)
-    public static EcoCore instance;
-    @SidedProxy(serverSide = "net.ecocraft.ecocore.proxy.ServerProxy", clientSide = "net.ecocraft.ecocore.proxy.ClientProxy")
-    public static ServerProxy proxy;
+	@Mod.Instance(MODID)
+	public static EcoCore instance;
+	@SidedProxy(
+			serverSide = "net.ecocraft.ecocore.server.ServerProxy",
+			clientSide = "net.ecocraft.ecocore.client.ClientProxy")
+	public static ServerProxy proxy;
 
-    @Mod.EventHandler
-    public void onPreInit(FMLPreInitializationEvent event) {
-        RecipeSorter.register("StatRecipes", StatRecipes.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
+	@Mod.EventHandler
+	public void onPreInit(FMLPreInitializationEvent event) {
+		RecipeSorter.register(
+				"StatRecipes",
+				StatRecipes.class,
+				RecipeSorter.Category.SHAPELESS,
+				"after:minecraft:shapeless");
 
-        proxy.onPreInit();
-    }
+		proxy.onPreInit();
+	}
 
-    @Mod.EventHandler
-    public void onInit(FMLInitializationEvent event) {
-        proxy.onInit();
+	@Mod.EventHandler
+	public void onInit(FMLInitializationEvent event) {
 
-        ContentObject.registerObjRecipes();
-        ContentObject.registerOreDicts();
-        ContentObject.registerIRegisters();
-    }
+		EcoRegistry.registerObjRecipes();
+		EcoRegistry.registerOreDicts();
+		EcoRegistry.registerEntities();
+		EcoRegistry.registerIRegisters();
 
-    @Mod.EventHandler
-    public void onPostInit(FMLPostInitializationEvent event) {
-        proxy.onPostInit();
-    }
+		proxy.onInit();
+	}
+
+	@Mod.EventHandler
+	public void onPostInit(FMLPostInitializationEvent event) {
+		proxy.onPostInit();
+	}
 }
