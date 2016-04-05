@@ -1,5 +1,6 @@
 package net.ecocraft.ecofauna;
 
+import net.ecocraft.ecocore.EcoCore;
 import net.ecocraft.ecocore.registry.EcoRegistry;
 import net.ecocraft.ecocore.registry.helper.EntityEntry;
 import net.ecocraft.ecofauna.entity.aquatic.EntityArapaima;
@@ -14,20 +15,22 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = EcoFauna.MODID, name = "EcoFauna", version = EcoFauna.VERSION)
+@Mod(
+		modid = EcoFauna.MODID,
+		name = "EcoFauna",
+		version = EcoFauna.VERSION,
+		dependencies = ("required-after:" + EcoCore.MODID))
 public class EcoFauna {
 	public static final String MODID = "ecofauna";
 	public static final String VERSION = "0.1.0";
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-
+		registerEntities();
 	}
 
 	@Mod.EventHandler
-	public void load(FMLInitializationEvent event) {
-		registerEntities();
-	}
+	public void load(FMLInitializationEvent event) {}
 
 	//@formatter:off
 	private void registerEntities() {

@@ -37,4 +37,11 @@ public class EntityAquaticBase extends EntityFlauraBase {
 			this.setAir(maximumAirSupply);
 		}
 	}
+
+	/**
+	 * Checks that the entity is not colliding with any blocks / liquids
+	 */
+	public boolean isNotColliding() {
+		return this.worldObj.checkNoEntityCollision(this.getEntityBoundingBox(), this);
+	}
 }

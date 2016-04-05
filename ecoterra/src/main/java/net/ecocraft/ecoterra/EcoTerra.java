@@ -1,5 +1,6 @@
 package net.ecocraft.ecoterra;
 
+import net.ecocraft.ecocore.EcoCore;
 import net.ecocraft.ecocore.registry.EcoRegistry;
 import net.ecocraft.ecocore.registry.helper.ContentObject;
 import net.ecocraft.ecocore.registry.helper.RecipeHelper;
@@ -38,7 +39,11 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-@Mod(modid = EcoTerra.MODID, name = "EcoTerra", version = EcoTerra.VERSION)
+@Mod(
+		modid = EcoTerra.MODID,
+		name = "EcoTerra",
+		version = EcoTerra.VERSION,
+		dependencies = ("required-after:" + EcoCore.MODID))
 public class EcoTerra {
 	public static final String MODID = "ecoterra";
 	public static final String VERSION = "0.1.0";

@@ -35,18 +35,17 @@ public class EcoCore {
 
 	@Mod.EventHandler
 	public void onInit(FMLInitializationEvent event) {
-
+		EcoRegistry.registerOreDicts();
+		EcoRegistry.registerEntities();
+		EcoRegistry.registerIRegisters();
+		EcoRegistry.registerObjRecipes();
 		proxy.onInit();
 	}
 
 	@Mod.EventHandler
 	public void onPostInit(FMLPostInitializationEvent event) {
 
-		EcoRegistry.registerObjRecipes();
-		EcoRegistry.registerOreDicts();
-		EcoRegistry.registerEntities();
-		EcoRegistry.registerIRegisters();
-
 		proxy.onPostInit();
+
 	}
 }
