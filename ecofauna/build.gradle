@@ -2,3 +2,7 @@ version = getVersion("EcoFauna", "VERSION") + "-1.8.9"
 ext.llibrary_version = getVersion("EcoFauna", "LLIBRARY_VERSION")
 group = "net.ecocraft.ecofauna"
 archivesBaseName = "ecofauna"
+
+dependencies {
+    compile project(path: ":ecocore", configuration: "deobf")
+}

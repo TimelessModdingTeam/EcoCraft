@@ -18,8 +18,8 @@ public class EcoCore {
 	@Mod.Instance(MODID)
 	public static EcoCore instance;
 	@SidedProxy(
-			serverSide = "net.ecocraft.ecocore.server.ServerProxy",
-			clientSide = "net.ecocraft.ecocore.client.ClientProxy")
+			serverSide = "net.ecocraft.ecocore.proxy.ServerProxy",
+			clientSide = "net.ecocraft.ecocore.proxy.ClientProxy")
 	public static ServerProxy proxy;
 
 	@Mod.EventHandler
@@ -36,16 +36,17 @@ public class EcoCore {
 	@Mod.EventHandler
 	public void onInit(FMLInitializationEvent event) {
 
-		EcoRegistry.registerObjRecipes();
-		EcoRegistry.registerOreDicts();
-		EcoRegistry.registerEntities();
-		EcoRegistry.registerIRegisters();
-
 		proxy.onInit();
 	}
 
 	@Mod.EventHandler
 	public void onPostInit(FMLPostInitializationEvent event) {
+
+		EcoRegistry.registerObjRecipes();
+		EcoRegistry.registerOreDicts();
+		EcoRegistry.registerEntities();
+		EcoRegistry.registerIRegisters();
+
 		proxy.onPostInit();
 	}
 }

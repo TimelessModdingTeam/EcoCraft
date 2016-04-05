@@ -1,7 +1,6 @@
 package net.ecocraft.ecocore.registry.helper;
 
-import net.ecocraft.ecocore.server.registry.EcoRegistry;
-import net.ecocraft.ecocore.server.registry.helper.ContentObject;
+import net.ecocraft.ecocore.registry.EcoRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;

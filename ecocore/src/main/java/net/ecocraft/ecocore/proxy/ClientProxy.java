@@ -3,9 +3,9 @@ package net.ecocraft.ecocore.proxy;
 import java.util.List;
 import java.util.Set;
 
+import net.ecocraft.ecocore.registry.EcoRegistry;
 import net.ecocraft.ecocore.registry.helper.ContentObject;
 import net.ecocraft.ecocore.registry.helper.EntityEntry;
-import net.ecocraft.ecocore.server.registry.EcoRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.entity.RenderItem;
