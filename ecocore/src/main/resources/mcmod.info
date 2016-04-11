@@ -1,11 +1,12 @@
-[
-  {
+{
+  "modListVersion": 2,
+  "modList": [{
     "modid": "ecocore",
     "name": "EcoCore",
     "authorList": [
       "TeamEC"
     ],
-    "description": "EcoCraft Core"
-    "version": "${version}",
-  }
-]
+    "description": "EcoCraft Core",
+    "version": "${version}"
+  }]
+}
