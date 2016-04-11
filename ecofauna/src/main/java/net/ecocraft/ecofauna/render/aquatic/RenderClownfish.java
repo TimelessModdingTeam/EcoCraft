@@ -22,5 +22,4 @@ public class RenderClownfish extends RenderLiving<EntityClownfish> {
 	protected ResourceLocation getEntityTexture(EntityClownfish entity) {
 		return TEXTURE;
 	}
-
 }

@@ -22,5 +22,4 @@ public class RenderArapaima extends RenderLiving<EntityArapaima> {
 	protected ResourceLocation getEntityTexture(EntityArapaima entity) {
 		return TEXTURE;
 	}
-
 }

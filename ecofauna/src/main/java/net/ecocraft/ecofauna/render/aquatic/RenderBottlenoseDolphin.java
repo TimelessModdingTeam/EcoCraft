@@ -10,8 +10,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderBottlenoseDolphin extends RenderLiving<EntityBottlenoseDolphin> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(
-			EcoFauna.MODID + ":textures/BottlenoseDolphin.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(EcoFauna.MODID + ":textures/BottlenoseDolphin.png");
 	private static final ModelBase modelbase = new BottlenoseDolphin();
 	private static final float shadowsize = 2.0f;
 
@@ -23,5 +22,4 @@ public class RenderBottlenoseDolphin extends RenderLiving<EntityBottlenoseDolphi
 	protected ResourceLocation getEntityTexture(EntityBottlenoseDolphin entity) {
 		return TEXTURE;
 	}
-
 }

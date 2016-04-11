@@ -23,5 +23,4 @@ public class RenderCommonOctopus extends RenderLiving<EntityCommonOctopus> {
 	protected ResourceLocation getEntityTexture(EntityCommonOctopus entity) {
 		return TEXTURE;
 	}
-
 }
