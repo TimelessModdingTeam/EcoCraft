@@ -77,6 +77,9 @@ subprojects {
                     outputDir = file("build/" + artifact.classifier)
                 })
                 tasks.findByPath(":build").dependsOn task
+                if(artifact.classifier == "") {
+                    task.dependsOn tasks.findByPath("reobfJar")
+                }
             }
             task.inputs.file artifact.file
             task.dependsOn artifact
