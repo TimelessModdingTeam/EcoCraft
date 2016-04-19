@@ -1,5 +1,6 @@
 package net.ecocraft.ecocore;
 
+import net.ecocraft.ecocore.command.ClaimLandCommand;
 import net.ecocraft.ecocore.proxy.ServerProxy;
 import net.ecocraft.ecocore.registry.EcoRegistry;
 import net.ecocraft.ecocore.registry.recipe.StatRecipes;
@@ -8,6 +9,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.oredict.RecipeSorter;
 
 @Mod(modid = EcoCore.MODID, name = "EcoCore", version = EcoCore.VERSION)
@@ -29,7 +31,6 @@ public class EcoCore {
 				StatRecipes.class,
 				RecipeSorter.Category.SHAPELESS,
 				"after:minecraft:shapeless");
-
 		proxy.onPreInit();
 	}
 
@@ -44,8 +45,11 @@ public class EcoCore {
 
 	@Mod.EventHandler
 	public void onPostInit(FMLPostInitializationEvent event) {
-
 		proxy.onPostInit();
+	}
 
+	@Mod.EventHandler
+	public void serverLoad(FMLServerStartingEvent event) {
+		event.registerServerCommand(new ClaimLandCommand());
 	}
 }
