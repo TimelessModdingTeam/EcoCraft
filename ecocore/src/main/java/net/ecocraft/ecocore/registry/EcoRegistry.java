@@ -2,6 +2,7 @@ package net.ecocraft.ecocore.registry;
 
 import java.util.Random;
 
+import net.ecocraft.ecocore.registry.helper.ChunkUserEntry;
 import net.ecocraft.ecocore.registry.helper.ContentObject;
 import net.ecocraft.ecocore.registry.helper.EntityEntry;
 import net.minecraft.item.ItemStack;
@@ -18,6 +19,14 @@ public class EcoRegistry {
 
 	public static void registerEntity(Object modClass, EntityEntry<?> entityEntry) {
 		instance.addEntity(modClass, entityEntry);
+	}
+
+	/**
+	 * Registers the data object and returns a key to be used for access in the future
+	 */
+	public static String registerChunkData(Object modClass, ChunkUserEntry chunkData) {
+		Mod mod = modClass.getClass().getAnnotation(Mod.class);
+		return instance.addChunkUser(mod, chunkData);
 	}
 
 	public static void removeItemStack(ItemStack item) {
@@ -38,6 +47,10 @@ public class EcoRegistry {
 
 	public static void registerEntities() {
 		instance.registerEntities();
+	}
+
+	public static void registerChunkDataUsers() {
+		instance.registerChunkUsers();
 	}
 
 }

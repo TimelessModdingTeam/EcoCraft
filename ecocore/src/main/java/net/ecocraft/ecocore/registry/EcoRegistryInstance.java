@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import net.ecocraft.ecocore.registry.helper.ChunkUserEntry;
 import net.ecocraft.ecocore.registry.helper.ContentObject;
 import net.ecocraft.ecocore.registry.helper.EntityEntry;
 import net.ecocraft.ecocore.registry.helper.IRegisterContent;
@@ -22,6 +23,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.ChestGenHooks;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class EcoRegistryInstance {
@@ -30,6 +32,7 @@ public class EcoRegistryInstance {
 	public final HashMap<Object, List<ContentObject>> objectRegistry = new HashMap<Object, List<ContentObject>>();
 	public final HashMap<Object, List<RecipeRegistry>> recipeRegistry = new HashMap<Object, List<RecipeRegistry>>();
 	public final HashMap<Object, List<EntityEntry<?>>> entityRegistry = new HashMap<>();
+	public final HashMap<Mod, List<ChunkUserEntry>> chunkRegistry = new HashMap<>();
 	public final HashSet<IRegisterContent> iregisters = new HashSet<>();
 
 	public Set<Object> getRegMods() {
@@ -37,6 +40,7 @@ public class EcoRegistryInstance {
 		mods.addAll(objectRegistry.keySet());
 		mods.addAll(recipeRegistry.keySet());
 		mods.addAll(entityRegistry.keySet());
+		mods.addAll(chunkRegistry.keySet());
 		return mods;
 	}
 
@@ -104,6 +108,12 @@ public class EcoRegistryInstance {
 	public void addEntity(Object modClass, EntityEntry<?> entityEntry) {
 		List<EntityEntry<?>> entryList = entityRegistry.computeIfAbsent(modClass, (k) -> new ArrayList<>());
 		entryList.add(entityEntry);
+	}
+
+	public String addChunkUser(Mod mod, ChunkUserEntry chunkData) {
+		List<ChunkUserEntry> entryList = chunkRegistry.computeIfAbsent(mod, (k) -> new ArrayList<>());
+		entryList.add(chunkData);
+		return chunkData.getUniqueKey(mod);
 	}
 
 	// Object Removal
@@ -243,6 +253,14 @@ public class EcoRegistryInstance {
 		for (Entry<Object, List<EntityEntry<?>>> modList : entityRegistry.entrySet()) {
 			for (EntityEntry<?> entry : modList.getValue()) {
 				entry.registerEntity(modList.getKey());
+			}
+		}
+	}
+
+	public void registerChunkUsers() {
+		for (Entry<Mod, List<ChunkUserEntry>> modList : chunkRegistry.entrySet()) {
+			for (ChunkUserEntry entry : modList.getValue()) {
+				entry.register(modList.getKey());
 			}
 		}
 	}

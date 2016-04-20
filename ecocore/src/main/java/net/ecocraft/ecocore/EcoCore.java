@@ -1,9 +1,13 @@
 package net.ecocraft.ecocore;
 
+import net.ecocraft.ecocore.claims.ClaimInformation;
 import net.ecocraft.ecocore.command.ClaimLandCommand;
 import net.ecocraft.ecocore.proxy.ServerProxy;
+import net.ecocraft.ecocore.registry.ChunkRegistry;
 import net.ecocraft.ecocore.registry.EcoRegistry;
+import net.ecocraft.ecocore.registry.helper.ChunkUserEntry;
 import net.ecocraft.ecocore.registry.recipe.StatRecipes;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -36,11 +40,20 @@ public class EcoCore {
 
 	@Mod.EventHandler
 	public void onInit(FMLInitializationEvent event) {
+		initializeClaimSystem();
+
 		EcoRegistry.registerOreDicts();
 		EcoRegistry.registerEntities();
 		EcoRegistry.registerIRegisters();
 		EcoRegistry.registerObjRecipes();
+		EcoRegistry.registerChunkDataUsers();
 		proxy.onInit();
+	}
+
+	private void initializeClaimSystem() {
+		MinecraftForge.EVENT_BUS.register(ChunkRegistry.ChunkListener.instance);
+		ClaimInformation.CLAIM_KEY = EcoRegistry
+				.registerChunkData(this, new ChunkUserEntry("claim", (k) -> new ClaimInformation()));
 	}
 
 	@Mod.EventHandler
